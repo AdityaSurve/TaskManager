@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/pana.png";
 const Register = () => {
   const [user, setUser] = useState({ username: "", email: "", password: "" });
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const register = async (user: any) => {
     const response = await fetch("http://localhost:5000/auth/register", {
       method: "POST",
@@ -15,7 +17,8 @@ const Register = () => {
     const data = await response.json();
     if (data.token) {
       localStorage.setItem("token", data.token);
-      window.location.href = "/home";
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/home", { state: { user } });
       toast.success("Registered Successful");
     } else {
       toast.error("Registration Failed");

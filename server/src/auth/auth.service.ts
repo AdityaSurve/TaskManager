@@ -24,8 +24,9 @@ export class AuthService {
       return { error: 'Invalid password' };
     }
     const token = this.jwtService.sign({ email: existingUser.email });
-    return { token };
+    return { token, user: existingUser };
   }
+
   async register(user: NewUser) {
     if (user.username === '') return { error: 'Missing username' };
     if (user.email === '') return { error: 'Missing email' };
@@ -38,6 +39,6 @@ export class AuthService {
     }
     const createdUser = await this.userModel.create(user);
     const token = this.jwtService.sign({ email: createdUser.email });
-    return { token };
+    return { token, user: createdUser };
   }
 }
