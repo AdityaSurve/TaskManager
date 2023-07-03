@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import Logo from "../assets/pana.png";
 const Register = () => {
   const [user, setUser] = useState({ username: "", email: "", password: "" });
@@ -15,6 +16,9 @@ const Register = () => {
     if (data.token) {
       localStorage.setItem("token", data.token);
       window.location.href = "/home";
+      toast.success("Registered Successful");
+    } else {
+      toast.error("Registration Failed");
     }
   };
   useEffect(() => {

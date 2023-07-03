@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Logo from "../assets/pana.png";
+import { toast } from "react-hot-toast";
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [email, setEmail] = useState("");
@@ -14,6 +15,9 @@ const Login = () => {
     if (data.token) {
       localStorage.setItem("token", data.token);
       window.location.href = "/home";
+      toast.success("Login Successful");
+    } else {
+      toast.error("Login Failed");
     }
   };
   useEffect(() => {
