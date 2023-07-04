@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { User } from './dtos/user.dto';
 import { Model } from 'mongoose';
